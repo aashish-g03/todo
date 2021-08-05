@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 List<String> todoItems = [];
 List<String> desList = [];
@@ -12,12 +13,20 @@ class DisplayItemState extends State<DisplayItem> {
   @override
   Widget build(BuildContext context) {
     if (todoItems.length == 0)
-      return Container(
-        child: Text(
-          'NO TO DO ITEMS',
+      return Align(
+        alignment: Alignment.center,
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Text(
+            'NO TO DO ITEMS',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       );
-    bool checked = false;
+    var checked = false;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20),
@@ -26,47 +35,64 @@ class DisplayItemState extends State<DisplayItem> {
         itemBuilder: (context, index) {
           final title = todoItems[index];
           final des = desList[index];
-          return Container(
-            child: ListTile(
-              leading: FlatButton(
-                child: Icon(
-                  Icons.check,
-                  size: 30,
-                  color: checked ? Colors.green : Colors.grey,
-                ),
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(5),
-                onPressed: () {
-                  setState(() {
-                    checked = !checked;
-                  });
-                },
+          return Column(
+            children: [
+              Text(
+                '\n',
+                style: TextStyle(fontSize: 5),
               ),
-              title: Text(
-                title,
-              ),
-              subtitle: Text(des),
-              trailing: FlatButton(
-                child: Icon(
-                  Icons.delete,
-                  size: 30,
-                ),
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(5),
-                onPressed: () {
-                  setState(
-                    () {
-                      todoItems.remove(title);
-                      desList.remove(des);
+              Container(
+                child: ListTile(
+                  leading: FlatButton(
+                    child: Icon(
+                      (checked) ? Icons.check_box_rounded : Icons.circle,
+                      size: 30,
+                    ),
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.all(5),
+                    onPressed: () {
+                      setState(() {
+                        checked = !checked;
+                      });
                     },
-                  );
-                },
+                  ),
+                  title: Text(
+                    title,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        decoration: (checked)
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none),
+                  ),
+                  subtitle: Text(
+                    des,
+                    style: TextStyle(fontSize: 19, color: Colors.black),
+                  ),
+                  trailing: FlatButton(
+                    child: Icon(
+                      Icons.delete,
+                      size: 30,
+                    ),
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.all(5),
+                    onPressed: () {
+                      setState(
+                        () {
+                          todoItems.remove(title);
+                          desList.remove(des);
+                        },
+                      );
+                    },
+                  ),
+                ),
+                decoration: new BoxDecoration(
+                  color: Colors
+                      .primaries[Random().nextInt(Colors.primaries.length)],
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-            ),
-            decoration: new BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(12),
-            ),
+            ],
           );
         },
       ),

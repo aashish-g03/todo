@@ -27,6 +27,7 @@ class AddItemState extends State<AddItem> {
             padding: EdgeInsets.all(19),
             child: Text(
               'ADD A TODO TASK',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
@@ -74,12 +75,12 @@ class AddItemState extends State<AddItem> {
               child: Icon(
                 Icons.add,
                 size: 30,
-                color: Colors.black38,
+                color: Colors.white,
               ),
               style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(24),
-              ),
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(24),
+                  primary: Colors.black),
             ),
           )
         ],
