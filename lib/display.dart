@@ -15,14 +15,11 @@ class DisplayItemState extends State<DisplayItem> {
     if (todoItems.length == 0)
       return Align(
         alignment: Alignment.center,
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Text(
-            'NO TO DO ITEMS',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+        child: Text(
+          'NO TO-DO ITEMS',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
           ),
         ),
       );

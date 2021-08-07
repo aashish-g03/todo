@@ -17,17 +17,40 @@ class AddItemState extends State<AddItem> {
   Widget build(BuildContext context) {
     final title = TextEditingController();
     final description = TextEditingController();
+    void validInput() {
+      Fluttertoast.showToast(
+        msg: "${title.text} added.",
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.blueAccent,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      addItem(title.text, description.text);
+    }
+
+    void invalidInput() {
+      Fluttertoast.showToast(
+        msg: "Invalid Input",
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
 
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
       child: Column(
         children: [
           Padding(
             padding: EdgeInsets.all(19),
             child: Text(
               'ADD A TODO TASK',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Padding(
@@ -45,6 +68,10 @@ class AddItemState extends State<AddItem> {
                 border: UnderlineInputBorder(),
                 labelText: 'TO-DO TITLE',
               ),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Padding(
@@ -55,6 +82,10 @@ class AddItemState extends State<AddItem> {
                 border: UnderlineInputBorder(),
                 labelText: 'DESCRIPTION',
               ),
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Spacer(),
@@ -62,14 +93,10 @@ class AddItemState extends State<AddItem> {
             padding: EdgeInsets.all(25),
             child: ElevatedButton(
               onPressed: () {
-                Fluttertoast.showToast(
-                  msg: "${title.text} added.",
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.blueAccent,
-                  textColor: Colors.white,
-                  fontSize: 16.0,
-                );
-                addItem(title.text, description.text);
+                if ((title.text).length > 0)
+                  validInput();
+                else
+                  invalidInput();
                 setState(() {});
               },
               child: Icon(
