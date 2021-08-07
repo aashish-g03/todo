@@ -40,13 +40,15 @@ class DisplayItemState extends State<DisplayItem> {
               ),
               Container(
                 child: ListTile(
-                  leading: FlatButton(
+                  leading: TextButton(
                     child: Icon(
                       (checked) ? Icons.check_box_rounded : Icons.circle,
                       size: 30,
                     ),
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(5),
+                    style: TextButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(5),
+                    ),
                     onPressed: () {
                       setState(() {
                         checked = !checked;
@@ -66,13 +68,15 @@ class DisplayItemState extends State<DisplayItem> {
                     des,
                     style: TextStyle(fontSize: 19, color: Colors.black),
                   ),
-                  trailing: FlatButton(
+                  trailing: TextButton(
                     child: Icon(
                       Icons.delete,
                       size: 30,
                     ),
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(5),
+                    style: TextButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(5),
+                    ),
                     onPressed: () {
                       setState(
                         () {
