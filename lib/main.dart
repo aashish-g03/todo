@@ -4,7 +4,9 @@ import './display.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -39,6 +41,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: PageView(
           scrollDirection: Axis.horizontal,
           controller: pagecontroller,

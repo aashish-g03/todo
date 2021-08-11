@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:fluttertoast/fluttertoast.dart';
 
 List<String> todoItems = [];
 List<String> desList = [];
+Map<int, bool> important = {0: false};
 
 class DisplayItem extends StatefulWidget {
   @override
@@ -19,11 +20,10 @@ class DisplayItemState extends State<DisplayItem> {
           'NO TO-DO ITEMS',
           style: TextStyle(
             fontSize: 25,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w900,
           ),
         ),
       );
-    var checked = false;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(20),
@@ -32,6 +32,10 @@ class DisplayItemState extends State<DisplayItem> {
         itemBuilder: (context, index) {
           final title = todoItems[index];
           final des = desList[index];
+          for (int i = 0; i < todoItems.length + 1; i++) {
+            if (important[i] != true) important[i] = false;
+          }
+
           return Column(
             children: [
               Text(
@@ -42,27 +46,33 @@ class DisplayItemState extends State<DisplayItem> {
                 child: ListTile(
                   leading: TextButton(
                     child: Icon(
-                      (checked) ? Icons.check_box_rounded : Icons.circle,
+                      Icons.star,
                       size: 30,
                     ),
                     style: TextButton.styleFrom(
+                      primary:
+                          important[index] ? Colors.amber : Colors.grey[400],
+                      backgroundColor: Colors.white,
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(5),
                     ),
                     onPressed: () {
-                      setState(() {
-                        checked = !checked;
-                      });
+                      setState(() {});
+                      important[index] = !important[index];
+                      Fluttertoast.showToast(
+                        msg: important[index] ? "Marked Important" : "Unmarked",
+                        backgroundColor: Colors.redAccent,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                     },
                   ),
                   title: Text(
                     title,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        decoration: (checked)
-                            ? TextDecoration.lineThrough
-                            : TextDecoration.none),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
                   ),
                   subtitle: Text(
                     des,
@@ -75,6 +85,8 @@ class DisplayItemState extends State<DisplayItem> {
                     ),
                     style: TextButton.styleFrom(
                       shape: CircleBorder(),
+                      primary: Colors.black,
+                      backgroundColor: Colors.white,
                       padding: EdgeInsets.all(5),
                     ),
                     onPressed: () {
@@ -88,8 +100,7 @@ class DisplayItemState extends State<DisplayItem> {
                   ),
                 ),
                 decoration: new BoxDecoration(
-                  color: Colors
-                      .primaries[Random().nextInt(Colors.primaries.length)],
+                  color: Colors.blueAccent[100],
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
