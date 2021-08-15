@@ -13,9 +13,8 @@ class DisplayItem extends StatefulWidget {
 class DisplayItemState extends State<DisplayItem> {
   @override
   Widget build(BuildContext context) {
-    if (todoItems.length == 0)
-      return Align(
-        alignment: Alignment.center,
+    if (todoItems.isEmpty) {
+      return const Align(
         child: Text(
           'NO TO-DO ITEMS',
           style: TextStyle(
@@ -24,9 +23,10 @@ class DisplayItemState extends State<DisplayItem> {
           ),
         ),
       );
+    }
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: ListView.builder(
         itemCount: todoItems.length,
         itemBuilder: (context, index) {
@@ -38,23 +38,23 @@ class DisplayItemState extends State<DisplayItem> {
 
           return Column(
             children: [
-              Text(
+              const Text(
                 '\n',
                 style: TextStyle(fontSize: 5),
               ),
               Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent[100],
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 child: ListTile(
                   leading: TextButton(
-                    child: Icon(
-                      Icons.star,
-                      size: 30,
-                    ),
                     style: TextButton.styleFrom(
                       primary:
                           important[index] ? Colors.amber : Colors.grey[400],
                       backgroundColor: Colors.white,
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(5),
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(5),
                     ),
                     onPressed: () {
                       setState(() {});
@@ -66,28 +66,28 @@ class DisplayItemState extends State<DisplayItem> {
                         fontSize: 16.0,
                       );
                     },
+                    child: const Icon(
+                      Icons.star,
+                      size: 30,
+                    ),
                   ),
                   title: Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                     ),
                   ),
                   subtitle: Text(
                     des,
-                    style: TextStyle(fontSize: 19, color: Colors.black),
+                    style: const TextStyle(fontSize: 19, color: Colors.black),
                   ),
                   trailing: TextButton(
-                    child: Icon(
-                      Icons.delete,
-                      size: 30,
-                    ),
                     style: TextButton.styleFrom(
-                      shape: CircleBorder(),
+                      shape: const CircleBorder(),
                       primary: Colors.black,
                       backgroundColor: Colors.white,
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                     ),
                     onPressed: () {
                       setState(
@@ -97,11 +97,11 @@ class DisplayItemState extends State<DisplayItem> {
                         },
                       );
                     },
+                    child: const Icon(
+                      Icons.delete,
+                      size: 30,
+                    ),
                   ),
-                ),
-                decoration: new BoxDecoration(
-                  color: Colors.blueAccent[100],
-                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
             ],
