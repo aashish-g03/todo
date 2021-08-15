@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import './additem.dart';
-import './display.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import './additem.dart';
+import './display.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,14 +24,14 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       bottomSelectedIndex = index;
       pagecontroller.animateToPage(index,
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
+          duration: const Duration(milliseconds: 500), curve: Curves.ease);
     });
   }
 
   int bottomSelectedIndex = 0;
-  final PageController pagecontroller = PageController(initialPage: 0);
+  final PageController pagecontroller = PageController();
 
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,7 +43,6 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: PageView(
-          scrollDirection: Axis.horizontal,
           controller: pagecontroller,
           onPageChanged: (index) {
             pageChanged(index);
@@ -57,7 +56,7 @@ class _MyAppState extends State<MyApp> {
           key: _bottomNavigationKey,
           index: bottomSelectedIndex,
           height: 50.0,
-          items: <Widget>[
+          items: const <Widget>[
             Icon(Icons.list, size: 20),
             Icon(Icons.add, size: 20),
           ],
@@ -65,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           buttonBackgroundColor: Colors.blueAccent[100],
           backgroundColor: Colors.white,
           animationCurve: Curves.easeInOut,
-          animationDuration: Duration(milliseconds: 500),
+          animationDuration: const Duration(milliseconds: 500),
           onTap: (index) {
             bottomTapped(index);
           },
